@@ -1,2 +1,6 @@
+import fs from 'fs';
 
-console.log("Hello via Bun!");
+let text = fs.readFileSync('index.js', 'utf-8')
+
+console.log(text);
+
