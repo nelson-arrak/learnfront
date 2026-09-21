@@ -1,0 +1,10 @@
+@use "sass:color";
+$bgcolor: lemonchiffon;
+
+body {
+    background-color: color.scale($bgcolor, $lightness: -20%);
+}
+
+div {
+    background-color: color.scale($bgcolor, $lightness: -60%);
+}
