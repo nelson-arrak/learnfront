@@ -1,7 +1,16 @@
-import mata from './math.js'
+let button = document.getElementById("btn");
+button.addEventListener('click', () =>{
+    if(button.classList.contains('is-primary')){
+        button.classList.replace('is-primary', 'is-warning')
+    } else {
+        button.classList.replace('is-warning', 'is-primary')
+    }
+    
+});
 
-let answer = mata.add(6,5);
-console.log(answer);
+let input = document.querySelector('#input')
+let reverseText = document.querySelector('#reverseText')
 
-
-
+input.addEventListener('input', () => {
+    reverseText.innerHTML = input.value.split('').reverse('').join('')
+});
