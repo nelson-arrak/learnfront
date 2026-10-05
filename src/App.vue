@@ -1,18 +1,28 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref } from 'vue';
+import ItemList from './ItemList.vue';
 
 let isPrimary = ref(true);
 let text = ref('');
-
-let items = ref(['Piim', 'Viin', 'Kali', 'Leib', 'Sibul']);
 let newItem = ref(['']);
+let i = 0;
+let items = ref([
+    {id:i++, text:'Piim', isDone: true}, 
+    {id:i++, text:'Viin', isDone: true}, 
+    {id:i++, text:'Kali', isDone: false}, 
+    {id:i++, text:'Leib', isDone: true}, 
+    {id:i++, text:'Sibul', isDone: false}, 
+]);
 
-function add(){
-    if(newItem.value.trim() !== ''){
-        items.value.push(newItem.value.trim());
+function add() {
+    if (newItem.value.trim() !== '') {
+        items.value.push({id:i++, text:newItem.value.trim(), isDone: false});
     }
     newItem.value = '';
 }
+
+let doneItems = computed(() => items.value.filter(item => item.isDone));
+let toDoItems = computed(() => items.value.filter(item => !item.isDone));
 </script>
 
 <template>
@@ -27,9 +37,9 @@ function add(){
                 </button>
             </div>
         </div>
-        <ul>
-            <li v-for="item in items">{{ item }}</li>
-        </ul>
+        <ItemList :items="toDoItems" title="ToDo items"></ItemList>
+        <ItemList :items="doneItems" title="Done items"></ItemList>
+        <ItemList :items="items" title="All items"></ItemList>
     </div>
 
 </template>
