@@ -1,6 +1,6 @@
 <script setup>
 import {computed, ref } from 'vue';
-import ItemList from './components/ItemList.vue';
+import ItemList from '../components/ItemList.vue';
 
 let isPrimary = ref(true);
 let text = ref('');
