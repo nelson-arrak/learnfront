@@ -1,1 +1,1 @@
-Learning Bun // node
+Learning Bun, Vue, Sass
