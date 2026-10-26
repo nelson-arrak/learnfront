@@ -7,7 +7,7 @@ defineProps(['items', 'title'])
     <ul>
         <li v-for="item in items" :key="item.id">
             <input type="checkbox" v-model="item.isDone">
-            {{ item.text }}
+            {{ item.text + " " + item.importance}}
         </li>
     </ul>
 </template>
