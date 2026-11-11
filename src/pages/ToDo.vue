@@ -2,12 +2,13 @@
 import { computed, ref } from 'vue';
 import ItemList from '../components/ItemList.vue';
 
-let importanceTerms = ref([
+const importanceTerms = ref([
     'Low',
     'Medium',
     'High',
     'Choose'
-])
+]);
+
 let activeImportance = 3;
 
 let isActive = ref(true);
@@ -61,9 +62,9 @@ let toDoItems = computed(() => items.value.filter(item => !item.isDone));
                 </button>
             </div>
         </div>
-        <ItemList :items="toDoItems" title="ToDo items"></ItemList>
-        <ItemList :items="doneItems" title="Done items"></ItemList>
-        <ItemList :items="items" title="All items"></ItemList>
+        <ItemList :items="toDoItems" title="ToDo items" :importanceTerms="importanceTerms"></ItemList>
+        <ItemList :items="doneItems" title="Done items" :importanceTerms="importanceTerms"></ItemList>
+        <ItemList :items="items" title="All items" :importanceTerms="importanceTerms"></ItemList>
     </div>
 
 </template>
