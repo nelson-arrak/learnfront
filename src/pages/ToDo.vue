@@ -17,7 +17,7 @@ let newItem = ref(['']);
 let i = 0;
 let items = ref([
     { id: i++, text: 'Piim', isDone: true, importance: 0 },
-    { id: i++, text: 'Viin', isDone: true, importance: 2},
+    { id: i++, text: 'Viin', isDone: true, importance: 2 },
     { id: i++, text: 'Kali', isDone: false, importance: 0 },
     { id: i++, text: 'Leib', isDone: true, importance: 1 },
     { id: i++, text: 'Sibul', isDone: false, importance: 2 },
@@ -30,6 +30,11 @@ function add() {
     newItem.value = '';
 }
 
+function sortAsc(x) {
+    return x.toSorted((a, b) => a.importance - b.importance);
+}
+
+
 let doneItems = computed(() => items.value.filter(item => item.isDone));
 let toDoItems = computed(() => items.value.filter(item => !item.isDone));
 </script>
@@ -41,10 +46,11 @@ let toDoItems = computed(() => items.value.filter(item => !item.isDone));
                 <input @keydown.enter="add" v-model="newItem" class="input" type="text" placeholder="Add task">
             </div>
             <!-- dropdown menu -->
-            <div @click="isActive = !isActive"  class="dropdown" :class="{'is-active': isActive, 'is-active': !isActive}">
+            <div @click="isActive = !isActive" class="dropdown"
+                :class="{ 'is-active': isActive, 'is-active': !isActive }">
                 <div class="dropdown-trigger">
                     <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                        <span >{{ importanceTerms[activeImportance] }}</span>
+                        <span>{{ importanceTerms[activeImportance] }}</span>
                     </button>
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu3" role="menu">
@@ -62,9 +68,9 @@ let toDoItems = computed(() => items.value.filter(item => !item.isDone));
                 </button>
             </div>
         </div>
-        <ItemList :items="toDoItems" title="ToDo items" :importanceTerms="importanceTerms"></ItemList>
-        <ItemList :items="doneItems" title="Done items" :importanceTerms="importanceTerms"></ItemList>
-        <ItemList :items="items" title="All items" :importanceTerms="importanceTerms"></ItemList>
+        <ItemList :items="sortAsc(toDoItems)" title="ToDo items" :importanceTerms="importanceTerms"></ItemList>
+        <ItemList :items="sortAsc(doneItems)" title="Done items" :importanceTerms="importanceTerms"></ItemList>
+        <ItemList :items="sortAsc(items)" title="All items" :importanceTerms="importanceTerms"></ItemList>
     </div>
 
 </template>
