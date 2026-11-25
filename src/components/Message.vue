@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
     class: {
         type: String,
@@ -20,18 +22,40 @@ const props = defineProps({
                 'white',
                 'black',
                 'text',
+                'link',
             ].includes(value)
         }
 
     },
-    text: String,
+    size: {
+        type: String,
+        validator(value, props) {
+            return [
+                'small',
+                'normal',
+                'medium',
+                'large',
+            ].includes(value)
+        }
+    },
+    text: {
+        type: String,
+        default: "World",
+    },
+    headerText: {
+        type: String,
+        default: "Hello",
+    },
 });
 
 let computedClass = computed(() => {
     let combined = '';
     combined += props.class;
-    if(props.color){
+    if (props.color) {
         combined += ' is-' + props.color
+    }
+    if(props.size){
+        combined += ' is-' + props.size
     }
     return combined;
 });
@@ -40,7 +64,7 @@ let computedClass = computed(() => {
 <template>
     <article class="message" :class="computedClass">
         <div class="message-header">
-            <p>Hello World</p>
+            <p>{{ headerText}}</p>
             <button class="delete" aria-label="delete"></button>
         </div>
         <div class="message-body">

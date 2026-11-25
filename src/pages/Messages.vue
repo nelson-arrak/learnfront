@@ -2,5 +2,5 @@
 import Message from '../components/Message.vue';
 </script>
 <template>
-    <Message color="dark" text="this is a message"></Message>
+    <Message color="danger" text="this is a message" headerText="this is a title"></Message>
 </template>
